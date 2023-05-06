@@ -51,8 +51,25 @@ class HomeScreen extends StatelessWidget {
                   const SectionHeader(
                     title: 'Trending Music'
                   ),
-                  const SizedBox(height: 15.0),
-
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.27, 
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal, 
+                      itemCount: songs.length, 
+                      itemBuilder: (context, index) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width * 0.40, 
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                songs[index].url,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
            ),
