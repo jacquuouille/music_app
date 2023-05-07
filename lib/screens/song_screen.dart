@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:just_audio/just_audio.dart';
 import '../models/song_model.dart';
 import 'package:rxdart/rxdart.dart' as rxdart;
@@ -13,8 +15,7 @@ class SongScreen extends StatefulWidget {
 
 class _SongScreenState extends State<SongScreen> {
   AudioPlayer audioPlayer = AudioPlayer(); // make sure you convert Stateless into Stateful widget first
-  Song song = Song.songs[0];
-
+  Song song = Get.arguments ?? Song.songs[0]; // to get the picture changing on the song_screen.dart
   // init the Stateful widget
   @override 
     void initState() {
@@ -26,6 +27,12 @@ class _SongScreenState extends State<SongScreen> {
           children: [
              AudioSource.uri(
                Uri.parse('asset:///${song.coverUrl}'),
+             ),
+             AudioSource.uri(
+               Uri.parse('asset:///${Song.songs[1].coverUrl}'),
+             ),
+             AudioSource.uri(
+               Uri.parse('asset:///${Song.songs[2].coverUrl}'),
              ),
            ],
         ),
@@ -67,7 +74,8 @@ class _SongScreenState extends State<SongScreen> {
           const _BackgroundFilter(),
           _MusicPlayer(
             seekBarDataStream: _seekBarDataStream, 
-            audioPlayer: audioPlayer
+            audioPlayer: audioPlayer, 
+            song: song,
           ),
         ],
       ),
@@ -79,11 +87,13 @@ class _SongScreenState extends State<SongScreen> {
 class _MusicPlayer extends StatelessWidget {
   final Stream<SeekBarData> _seekBarDataStream;
   final AudioPlayer audioPlayer;
+  final Song song;
 
   const _MusicPlayer({
     super.key,
     required Stream<SeekBarData> seekBarDataStream,
     required this.audioPlayer,
+    required this.song,
   }) : _seekBarDataStream = seekBarDataStream;
 
   @override
@@ -92,7 +102,24 @@ class _MusicPlayer extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            song.title, 
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 5.0),
+          Text(
+            song.artiste, 
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              color: Colors.white, 
+              // fontWeight: FontWeight.bold
+            ),
+          ),
+          const SizedBox(height: 18.0),
           StreamBuilder<SeekBarData>(
             stream:_seekBarDataStream, 
             builder: (context, snapshot) { 
@@ -104,7 +131,28 @@ class _MusicPlayer extends StatelessWidget {
                 );
             }
           ),
-          PlayerButtons(audioPlayer: audioPlayer)
+          PlayerButtons(audioPlayer: audioPlayer),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                iconSize: 30, 
+                onPressed: () {}, 
+                icon: const Icon(
+                  Icons.settings, 
+                  color: Colors.white,
+                ),
+              ),
+              IconButton(
+                iconSize: 30, 
+                onPressed: () {}, 
+                icon: const Icon(
+                  Icons.download, 
+                  color: Colors.white,
+                )
+              )
+            ]
+          )
         ],
       ),
     );
@@ -122,8 +170,28 @@ class PlayerButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        StreamBuilder(
+        // we create a SteamBuilder in order to create other buttons
+        //2 . what can be previously listened by the user?
+        StreamBuilder<SequenceState?>(
+          stream: audioPlayer.sequenceStateStream, 
+          builder: (context, index) {
+            return IconButton(
+              onPressed: audioPlayer.hasPrevious ? 
+              audioPlayer.seekToPrevious : null, 
+              iconSize: 45, 
+              icon: const Icon(
+                Icons.skip_previous, 
+                color: Colors.white,
+              )
+            );
+          }
+        ),
+
+
+        // 1. what do the user listen
+        StreamBuilder<PlayerState>(
           stream: audioPlayer.playerStateStream, 
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -179,6 +247,22 @@ class PlayerButtons extends StatelessWidget {
             } else {
               return const CircularProgressIndicator();
             }
+          }
+        ),
+
+
+        //3 . what can be listened next by the user?
+        StreamBuilder<SequenceState?>(
+          stream: audioPlayer.sequenceStateStream, 
+          builder: (context, index) {
+            return IconButton(
+              onPressed: audioPlayer.hasNext ? audioPlayer.seekToNext : null,
+              iconSize: 45, 
+              icon: const Icon(
+                Icons.skip_next, 
+                color: Colors.white,
+              )
+            );
           }
         ),
       ],

@@ -70,15 +70,7 @@ class HomeScreen extends StatelessWidget {
                     title: 'Playlists'
                   ),
                   const SizedBox(height: 20.0),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(), // because we are using a single scrollview
-                    scrollDirection: Axis.vertical,
-                    itemCount: playlists.length, 
-                    itemBuilder: ((context, index) {
-                      return PlaylistCard(playlist: playlists[index]);
-                    })
-                  )
+                  _PlaylistMusic(playlists: playlists)
                 ],
               ),
            ),
@@ -89,8 +81,29 @@ class HomeScreen extends StatelessWidget {
 }
 
 
+class _PlaylistMusic extends StatelessWidget {
+  const _PlaylistMusic({
+    super.key,
+    required this.playlists,
+  });
 
-// 3. SEARCH BAR
+  final List<Playlist> playlists;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(), // because we are using a single scrollview
+      scrollDirection: Axis.vertical,
+      itemCount: playlists.length, 
+      itemBuilder: ((context, index) {
+        return PlaylistCard(playlist: playlists[index]);
+      })
+    );
+  }
+}
+
+
 class _DiscoverMusic extends StatelessWidget {
   const _DiscoverMusic({
     super.key,
@@ -125,7 +138,6 @@ class _DiscoverMusic extends StatelessWidget {
 }
 
 
-// 2.CUSTOM BOTTOM NAVIGATION BAR
 class _CustomNavBar extends StatelessWidget {
   const _CustomNavBar({
     super.key,
@@ -163,7 +175,6 @@ class _CustomNavBar extends StatelessWidget {
 }
 
 
-// 1.CUSTOM HEADING BAR
 class _CustomAppBar extends StatelessWidget with PreferredSizeWidget { // we need to put the operator 'with', otherwise there will be an error
   const _CustomAppBar({super.key});
 

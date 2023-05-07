@@ -16,19 +16,19 @@ class Song {
       title: 'Playbox', 
       artiste: 'Purple Disco Machine', 
       url: 'assets/image/pdm.jpeg', 
-      coverUrl: 'assets/music/music_test.mp3'
+      coverUrl: 'assets/music/music_test.mp3',
     ), 
     Song(
       title: 'Poppiholla', 
       artiste: 'Chicane', 
       url: 'assets/image/chicane.jpeg', 
-      coverUrl: 'assets/music/music_test.mp3'
+      coverUrl: 'assets/music/music_test_bis.mp3', 
     ), 
     Song(
       title: 'Where The Streets Have No Name', 
       artiste: 'U2', 
       url: 'assets/image/u2.jpg', 
-      coverUrl: 'assets/music/music_test.mp3'
+      coverUrl: 'assets/music/music_test_third.mp3', 
 ), 
   ];
 

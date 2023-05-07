@@ -15,7 +15,7 @@ class SongCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed('/song', arguments: song);
+        Get.toNamed('/song', arguments: song); // it goes paired with get.arguments on song_screen.dart
       },
       child: Stack(
         alignment: Alignment.bottomCenter,
