@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import '../models/playlist_model.dart';
 import '../models/song_model.dart';
+import '../widgets/playlist_card.dart';
 import '../widgets/section_header.dart';
+import '../widgets/song_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -8,6 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Song> songs = Song.songs;
+    List<Playlist> playlists = Playlist.playlists;
     
     return Container(
       decoration: BoxDecoration(
@@ -52,24 +56,29 @@ class HomeScreen extends StatelessWidget {
                     title: 'Trending Music'
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.27, 
+                    height: MediaQuery.of(context).size.height * 0.23, 
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal, 
                       itemCount: songs.length, 
                       itemBuilder: (context, index) {
-                        return Container(
-                          width: MediaQuery.of(context).size.width * 0.40, 
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                songs[index].url,
-                              ),
-                            ),
-                          ),
-                        );
+                        return SongCard(song: songs[index]); // don't forget to declare the widget inside widget/widgets.dart
                       },
                     ),
                   ),
+                  const SizedBox(height: 20.0),
+                  const SectionHeader(
+                    title: 'Playlists'
+                  ),
+                  const SizedBox(height: 20.0),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(), // because we are using a single scrollview
+                    scrollDirection: Axis.vertical,
+                    itemCount: playlists.length, 
+                    itemBuilder: ((context, index) {
+                      return PlaylistCard(playlist: playlists[index]);
+                    })
+                  )
                 ],
               ),
            ),
@@ -78,6 +87,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
 
 
 // 3. SEARCH BAR
