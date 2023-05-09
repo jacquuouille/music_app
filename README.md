@@ -4,15 +4,15 @@ Here is a clean onboarding screen adapted for a music mobile app that can be rea
 
 The music app can be divided in 3 parts: 
 - **Home Screen:** 
-    - this is what the user see when he opens the app: a menu icon, their emoji's image profile, welcome message, search bar.
-    - the user can see his trending music. he see them all by scrolling right the screen.
-    - the user can also see his playlists split by genre. each playlist gives an image, the name of the genre as well as the number of songs related to it.
+    - this is what the user see when he opens the app: a menu icon, their emoji's image profile, a welcome message and a search bar.
+    - the user can see theirs trending musics. he sees them all by scrolling right the screen.
+    - the user can also see theirs playlists split by genre. each playlist gives an image, the name of the genre and the number of songs related to it.
     - the user can navigate through the app via the bottom menu bar.
 
 - **Song Screen:**
-    - the user can go to the song screen by clicling to one of the song listed in the "Trending Music" section from the HomeScreen, or by clicking to the 'Play' icon from the bottom menu bar.
+    - the user can go to the song screen by clicling to one of the song listed in the "Trending Music" section from the Home Screen, or by clicking to the 'Play' icon from the bottom menu bar on the Home Screen.
     - the page shows the jacket's song in the background as well the song's details (Title, Artist and Duration). 
-    - the player is able to navigate through the song by clicking on the player buttons 
+    - the player is able to navigate through the song by clicking to the player buttons:  
       - Playing the current music 
       - Playing the previous music 
       - Playing the next music
@@ -22,7 +22,7 @@ The music app can be divided in 3 parts:
       - Download the song
 
 - **Playlist Screen:**
-    - the user can go to the playlist screen by clicling to one of the playlist listed in the "Trending Music" section, or by clicking to the 'Heart' icon from the bottom menu bar.
+    - the user can go to the playlist screen by clicling to one of the playlist listed in the "Trending Music" section from the Home Screen, or by clicking to the 'Heart' icon from the bottom menu bar on the Home Screen.
     - the page shows the playlist and its content: 
       - the name of the playlist 
       - the name and the artists of the songs attached 
