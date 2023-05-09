@@ -2,7 +2,7 @@
 
 Here is a clean onboarding screen adapted for a music mobile app that can be read on both iOS and Android devices (build with Flutter). 
 
-In the video below, you will be able to see 3 sides of the music template app: 
+The music app can be divided in 3 parts: 
 - **Home Screen:** 
     - this is what the user see when he opens the app: a menu icon, their emoji's image profile, welcome message, search bar.
     - the user can see his trending music. he see them all by scrolling right the screen.
@@ -29,7 +29,6 @@ In the video below, you will be able to see 3 sides of the music template app:
     - the user can play the playlist' songs in the basic mode ("Play") or shuffled. 
     
 <br />
-
 <p align="center">
 <img src="https://www.cjoint.com/doc/23_05/MEhxYnYZQ7R_Screenshot-2023-05-08-at-01.49.11.png" height="487" width="259">
 <img src="https://www.cjoint.com/doc/23_05/MEhxYPWHHdR_Screenshot-2023-05-08-at-01.49.23.png" height="487" width="259">
