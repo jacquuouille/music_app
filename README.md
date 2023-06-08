@@ -4,7 +4,7 @@ Here is a clean onboarding screen adapted for a music mobile app that can be rea
 
 The music app can be divided in 3 parts: 
 - **Home Screen:** 
-    - this is what the user see when he opens the app: a menu icon, their emoji's image profile, a welcome message and a search bar.
+    - this is what the user sees when he opens the app: a menu icon, their emoji's image profile, a welcome message and a search bar.
     - the user can see theirs trending musics. he sees them all by scrolling right the screen.
     - the user can also see theirs playlists split by genre. each playlist gives an image, the name of the genre and the number of songs related to it.
     - the user can navigate through the app via the bottom menu bar.
